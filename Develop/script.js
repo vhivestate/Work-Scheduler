@@ -1,11 +1,8 @@
 $(document).ready(function(){
     // displaying date w jquery method
     $("#currentDay").text(moment().format('MMMM Do YYYY'));
-    // on click function save input into the field and time 
     $(".save").on("click", function(){
-        // displays message upon saving event to notify user that they saved their event to localStorage
         $("#storeMessage").removeClass("hidden");
-        // using this function to display the variables and then save it into the local storage 
         var text = $(this).siblings(".text").val();
         
         var time = $(this).parent().attr("id");
@@ -13,13 +10,31 @@ $(document).ready(function(){
         localStorage.setItem(time, text);
     });
         // saves local 
-        $("#09AM .text").val(localStorage.getItem("09AM"));
-        $("#10AM .text").val(localStorage.getItem("10AM"));
-        $("#11AM .text").val(localStorage.getItem("11AM"));
-        $("#12PM .text").val(localStorage.getItem("12PM"));
-        $("#13PM .text").val(localStorage.getItem("13PM"));
-        $("#14PM .text").val(localStorage.getItem("14PM"));
-        $("#15PM .text").val(localStorage.getItem("15PM"));
-        $("#16PM .text").val(localStorage.getItem("16PM"));
-        $("#17PM .text").val(localStorage.getItem("17PM"));
+        $("#9 .text").val(localStorage.getItem("9"));
+        $("#10 .text").val(localStorage.getItem("10"));
+        $("#11 .text").val(localStorage.getItem("11"));
+        $("#12 .text").val(localStorage.getItem("12"));
+        $("#13 .text").val(localStorage.getItem("13"));
+        $("#14 .text").val(localStorage.getItem("14"));
+        $("#15 .text").val(localStorage.getItem("15"));
+        $("#16 .text").val(localStorage.getItem("16"));
+        $("#17 .text").val(localStorage.getItem("17"));
+
+        //changes color of row based on time of the day
+
+        for (let index = 09; index < 18; index++) {
+            var hour = "#" + index;
+            var currentHour = moment().hour();
+            console.log(currentHour);
+            if (index === currentHour) {
+                $ (hour).addClass("present")
+            } 
+            else if (index < currentHour) {
+                $(hour).addClass("past")
+            }
+            else if (index > currentHour){
+                $(hour).addClass("future")
+            }
+        }
+})
 
